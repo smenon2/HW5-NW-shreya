@@ -1,4 +1,6 @@
- ![BuildStatus](https://github.com/smenon2/HW5-NW-shreya/actions/workflows/test.yml/badge.svg?event=push)
+![BuildStatus](https://github.com/smenon2/HW5-NW-shreya/actions/workflows/test.yml/badge.svg?event=push)
+
+
 # Project 4
 Needleman Wunsch Algorithm
 
