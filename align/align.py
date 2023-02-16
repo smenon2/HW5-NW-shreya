@@ -194,16 +194,16 @@ class NeedlemanWunsch:
                 max_score = max(self._align_matrix[i][j], self._gapA_matrix[i][j], self._gapB_matrix[i][j])
 
                 # We are going to store the pointers in the back matrix
-                # Match is diag
-                # gap in A is up
-                # gap in B is down
+                # Match is diag, 0
+                # gap in A is up, 1
+                # gap in B is down, 2
 
                 if max_score == self._align_matrix[i][j]:
-                    self._back[i][j] = 'diag'
+                    self._back[i][j] = 0
                 elif max_score == self._gapA_matrix[i][j]:
-                    self._back[i][j] = 'up'
+                    self._back[i][j] = -1
                 else:
-                    self._back[i][j] = 'down'
+                    self._back[i][j] = 1
 
         return self._backtrace()
 
@@ -230,14 +230,14 @@ class NeedlemanWunsch:
         while m > 0 or n > 0:
             pointer = self._back[m][n]
             # If pointer is 0, that means that the best score was a match (or mismatch, just not gap)
-            if pointer == 'diag':
+            if pointer == 0:
                 self.seqA_align = self._seqA[m - 1] + self.seqA_align
                 self.seqB_align = self._seqB[n - 1] + self.seqB_align
                 m = m - 1
                 n = n - 1
 
             # If pointer is -1, then there was a gap in A
-            elif pointer == 'up':
+            elif pointer == -1:
                 self.seqA_align = "_" + self.seqA_align
                 self.seqB_align = self._seqB[n - 1] + self.seqB_align
                 n = n - 1
